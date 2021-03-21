@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Lean Coffree</string>
+    <string name="header">Lean Coffree, a free Lean Coffee discussion tool
+</string>
 </resources>
