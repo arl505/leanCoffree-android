@@ -8,4 +8,7 @@
     <string name="goHomeReminderText">Don\'t have one? Return to the home screen and create a session!</string>
     <string name="joinSessionPromptHint">Link or Session ID</string>
     <string name="submit">Submit</string>
+    <string name="usernamePromptHeader">Enter a display name</string>
+    <string name="usernamePromptVisibilty">This will be visible to all in session</string>
+    <string name="displayNameLiteral">Display Name</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.arlevin.leancoffree.session.SessionActivity
 import org.json.JSONObject
 
 class JoinSessionActivity : AppCompatActivity() {
@@ -51,7 +52,7 @@ class JoinSessionActivity : AppCompatActivity() {
                         if (jsonResponse.getJSONObject("sessionDetails")
                                 .getString("sessionId") == match.value) {
                             finish()
-                            val intent = Intent(this, BrainstormingActivity::class.java).apply {
+                            val intent = Intent(this, SessionActivity::class.java).apply {
                                 putExtra("id", match.value)
                                 putExtra("status",
                                     jsonResponse.getJSONObject("sessionDetails")
