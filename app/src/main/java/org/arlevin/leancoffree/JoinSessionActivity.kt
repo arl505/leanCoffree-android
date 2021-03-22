@@ -13,7 +13,6 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 
-
 class JoinSessionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +21,7 @@ class JoinSessionActivity : AppCompatActivity() {
 
         val editText = findViewById<EditText>(R.id.joinInput)
         editText.setOnEditorActionListener() { _, actionId, _ ->
-            if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 onSubmitJoinSession(View(applicationContext))
                 true
             } else {
@@ -50,11 +49,15 @@ class JoinSessionActivity : AppCompatActivity() {
                 Response.Listener<String> { response ->
                     val jsonResponse = JSONObject(response)
                     if (jsonResponse.getString("verificationStatus") == "VERIFICATION_SUCCESS") {
-                        if (jsonResponse.getJSONObject("sessionDetails").getString("sessionId") == match.value) {
+                        if (jsonResponse.getJSONObject("sessionDetails")
+                                .getString("sessionId") == match.value) {
                             finish()
                             val intent = Intent(this, BrainstormingActivity::class.java).apply {
                                 putExtra("id", match.value)
-                                putExtra("status", jsonResponse.getJSONObject("sessionDetails").getString("sessionStatus"))
+                                putExtra("status",
+                                    jsonResponse.getJSONObject("sessionDetails")
+                                        .getString("sessionStatus")
+                                )
                             }
                             startActivity(intent)
                         }
