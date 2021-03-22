@@ -3,4 +3,9 @@
     <string name="header">Lean Coffree, a <b>free</b> lean coffee discussion tool</string>
     <string name="createButtonText">Create a new Lean Coffree session</string>
     <string name="joinButtonText">Join a Lean Coffree session</string>
+    <string name="joinSessionPrompt">Enter session link or ID below</string>
+    <string name="homeButtonText"><![CDATA[< Home]]></string>
+    <string name="goHomeReminderText">Don\'t have one? Return to the home screen and create a session!</string>
+    <string name="joinSessionPromptHint">Link or Session ID</string>
+    <string name="submit">Submit</string>
 </resources>
