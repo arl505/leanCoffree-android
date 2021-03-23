@@ -7,6 +7,7 @@ import org.arlevin.leancoffree.R
 class SessionActivity : AppCompatActivity() {
 
     var sessionId = ""
+    var username = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

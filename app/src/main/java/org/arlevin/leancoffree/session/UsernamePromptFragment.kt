@@ -49,6 +49,8 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
             jsonRequest.put("displayName", usernameInput.toString())
             jsonRequest.put("sessionId", (activity as SessionActivity?)!!.sessionId)
             jsonRequest.put("command", "ADD")
+
+            // todo: add real websocketUserId once stomp implemented
             jsonRequest.put("websocketUserId", UUID.randomUUID().toString())
 
             val url = "https://leancoffree.com:8085/refresh-users"
@@ -61,7 +63,8 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
                             "An error occurred, please retry", LENGTH_SHORT
                         ).show()
                     } else {
-                        (activity as SessionActivity?)!!.setBrainstorming()
+                        (activity as SessionActivity).username = usernameInput.toString()
+                        (activity as SessionActivity).setBrainstorming()
                     }
                 },
                 {
