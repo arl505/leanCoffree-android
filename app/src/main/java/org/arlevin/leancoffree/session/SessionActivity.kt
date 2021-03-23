@@ -14,10 +14,15 @@ class SessionActivity : AppCompatActivity() {
         var sessionStatus = "ASK_FOR_USERNAME"
 
         val brainstormingFragment = BrainstormingFragment()
-        val usernamePromptFragment = UsernamePromptFragment()
 
         if (sessionStatus.contains("ASK_FOR_USERNAME")) {
             supportFragmentManager.beginTransaction().apply {
+                val bundle = Bundle()
+                bundle.putString("sessionId", sessionId)
+
+                val usernamePromptFragment = UsernamePromptFragment()
+                usernamePromptFragment.arguments = bundle
+
                 replace(R.id.sessionFrame, usernamePromptFragment)
                 commit()
             }
