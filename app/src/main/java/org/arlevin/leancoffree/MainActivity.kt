@@ -6,9 +6,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.arlevin.leancoffree.session.SessionActivity
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
@@ -30,17 +30,17 @@ class MainActivity : AppCompatActivity() {
 
         val stringRequest = StringRequest(
             Request.Method.POST, url,
-            Response.Listener<String> { response ->
+            { response ->
                 val jsonResponse = JSONObject(response)
                 if (jsonResponse.getString("id").isNotBlank()) {
-                    val intent = Intent(this, BrainstormingActivity::class.java).apply {
+                    val intent = Intent(this, SessionActivity::class.java).apply {
                         putExtra("id", jsonResponse.getString("id"))
                         putExtra("status", "STARTED")
                     }
                     startActivity(intent)
                 }
             },
-            Response.ErrorListener {
+            {
                 Toast.makeText(
                     applicationContext, "An error occurred, please retry", Toast.LENGTH_SHORT
                 ).show()
