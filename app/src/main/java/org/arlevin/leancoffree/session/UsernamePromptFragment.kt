@@ -2,6 +2,7 @@ package org.arlevin.leancoffree.session
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -28,6 +29,16 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
         val submitButton = view.findViewById<Button>(R.id.submitUsernameButton)
         submitButton.setOnClickListener {
             submitUsername(view)
+        }
+
+        val editText = view.findViewById<EditText>(R.id.usernameInput)
+        editText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                submitUsername(view)
+                true
+            } else {
+                false
+            }
         }
     }
 
