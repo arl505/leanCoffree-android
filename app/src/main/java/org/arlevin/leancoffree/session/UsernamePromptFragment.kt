@@ -36,7 +36,7 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
         if (usernameInput.isNotBlank()) {
             val jsonRequest = JSONObject()
             jsonRequest.put("displayName", usernameInput.toString())
-            jsonRequest.put("sessionId", arguments!!.getString("sessionId"))
+            jsonRequest.put("sessionId", (activity as SessionActivity?)!!.sessionId)
             jsonRequest.put("command", "ADD")
             jsonRequest.put("websocketUserId", UUID.randomUUID().toString())
 
@@ -50,7 +50,7 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
                             "An error occurred, please retry", LENGTH_SHORT
                         ).show()
                     } else {
-                        // idk yet
+                        (activity as SessionActivity?)!!.setBrainstorming()
                     }
                 },
                 {

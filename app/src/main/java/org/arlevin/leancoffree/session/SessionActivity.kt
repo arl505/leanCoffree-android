@@ -5,32 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import org.arlevin.leancoffree.R
 
 class SessionActivity : AppCompatActivity() {
+
+    var sessionId = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.supportActionBar?.hide()
         setContentView(R.layout.activity_session)
 
-        val sessionId = intent.getStringExtra("id")!!
-        var sessionStatus = "ASK_FOR_USERNAME"
+        sessionId = intent.getStringExtra("id")!!
 
-        val brainstormingFragment = BrainstormingFragment()
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.sessionFrame, UsernamePromptFragment())
+            commit()
+        }
+    }
 
-        if (sessionStatus.contains("ASK_FOR_USERNAME")) {
-            supportFragmentManager.beginTransaction().apply {
-                val bundle = Bundle()
-                bundle.putString("sessionId", sessionId)
-
-                val usernamePromptFragment = UsernamePromptFragment()
-                usernamePromptFragment.arguments = bundle
-
-                replace(R.id.sessionFrame, usernamePromptFragment)
-                commit()
-            }
-        } else if (sessionStatus.contains("STARTED")) {
-            supportFragmentManager.beginTransaction().apply {
-                replace(R.id.sessionFrame, brainstormingFragment)
-                commit()
-            }
+    fun setBrainstorming() {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.sessionFrame, BrainstormingFragment())
+            commit()
         }
     }
 }
