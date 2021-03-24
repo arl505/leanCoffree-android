@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import org.arlevin.leancoffree.session.Constants
 import org.arlevin.leancoffree.session.SessionActivity
 import org.json.JSONObject
 
