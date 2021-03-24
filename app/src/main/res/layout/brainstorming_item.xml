@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="25dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,8 +13,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="5dp"
-            android:background="@drawable/border">
+            android:background="@drawable/thickborder">
 
             <TextView
                 android:id="@+id/brainstormingTopicTv"
@@ -24,17 +23,27 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:textAlignment="viewStart"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:padding="15dp" />
+
+            <View
+                android:id="@+id/hr"
+                app:layout_constraintTop_toBottomOf="@id/brainstormingTopicTv"
+                app:layout_constraintBottom_toTopOf="@id/brainstormingVotesTv"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/white" />
+
 
             <TextView
-                android:id="@+id/brainstormingVotesTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/brainstormingTopicTv"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textColor="@color/white"
-                android:textSize="18sp"/>
-
+                    android:id="@+id/brainstormingVotesTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/hr"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:padding="15dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
