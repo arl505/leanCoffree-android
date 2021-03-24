@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import org.arlevin.leancoffree.Constants
 import org.arlevin.leancoffree.R
+import org.json.JSONObject
 import ua.naiksoftware.stomp.StompClient
 
 class SessionActivity : AppCompatActivity() {
@@ -14,6 +15,8 @@ class SessionActivity : AppCompatActivity() {
         var websocketUserId = ""
         var sessionId = ""
         var username = ""
+        var topics = JSONObject()
+        var users = JSONObject()
     }
 
     private val stompClient: StompClient = StompClient(
@@ -30,9 +33,7 @@ class SessionActivity : AppCompatActivity() {
         stompClient.connect()
         stompClient.topic("/topic/users/session/$sessionId").subscribe(
         { message ->
-            println("Users message received: ")
-            println(message.payload)
-            println()
+            users = JSONObject(message.payload)
         },
         {
             throw Exception("Unable to subscribe to topic")
@@ -40,9 +41,8 @@ class SessionActivity : AppCompatActivity() {
 
         stompClient.topic("/topic/discussion-topics/session/$sessionId").subscribe(
         { message ->
-            println("Topics message received: ")
-            println(message.payload)
-            println()
+            topics = JSONObject(message.payload)
+            BrainstormingFragment.notifyTopics(this, topics.getJSONArray("discussionBacklogTopics"))
         },
         {
             throw Exception("Unable to subscribe to topic")
