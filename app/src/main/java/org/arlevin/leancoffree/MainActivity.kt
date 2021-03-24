@@ -26,10 +26,8 @@ class MainActivity : AppCompatActivity() {
 
     fun onCreateClick(view: View) {
         val queue = Volley.newRequestQueue(this)
-        val url = "https://leancoffree.com:8085/create-session"
-
         val stringRequest = StringRequest(
-            Request.Method.POST, url,
+            Request.Method.POST, Constants.backendBaseUrl + "/create-session",
             { response ->
                 val jsonResponse = JSONObject(response)
                 if (jsonResponse.getString("id").isNotBlank()) {

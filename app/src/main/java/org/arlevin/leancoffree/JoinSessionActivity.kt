@@ -43,7 +43,7 @@ class JoinSessionActivity : AppCompatActivity() {
 
         if (match != null && match.value.isNotBlank()) {
             val queue = Volley.newRequestQueue(this)
-            val url = "https://leancoffree.com:8085/verify-session/" + match.value
+            val url = Constants.backendBaseUrl + "/verify-session/" + match.value
 
             val stringRequest = StringRequest(Request.Method.POST, url,
                 { response ->
