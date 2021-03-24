@@ -11,7 +11,7 @@ class BrainstormingFragment : Fragment(R.layout.fragment_brainstorming) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<TextView>(R.id.tv1).text = (activity as SessionActivity).sessionId
-        view.findViewById<TextView>(R.id.tv2).text = (activity as SessionActivity).username
+        view.findViewById<TextView>(R.id.tv1).text = SessionActivity.sessionId
+        view.findViewById<TextView>(R.id.tv2).text = SessionActivity.username
     }
 }

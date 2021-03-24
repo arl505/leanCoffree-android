@@ -14,7 +14,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.arlevin.leancoffree.R
 import org.json.JSONObject
-import java.util.*
 
 class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
 
@@ -47,13 +46,11 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
         if (usernameInput.isNotBlank()) {
             val jsonRequest = JSONObject()
             jsonRequest.put("displayName", usernameInput.toString())
-            jsonRequest.put("sessionId", (activity as SessionActivity?)!!.sessionId)
+            jsonRequest.put("sessionId", SessionActivity.sessionId)
             jsonRequest.put("command", "ADD")
+            jsonRequest.put("websocketUserId", SessionActivity.websocketUserId)
 
-            // todo: add real websocketUserId once stomp implemented
-            jsonRequest.put("websocketUserId", UUID.randomUUID().toString())
-
-            val url = "https://leancoffree.com:8085/refresh-users"
+            val url = Constants.backendBaseUrl + "/refresh-users"
             val jsonObjectRequest = JsonObjectRequest(
                 Request.Method.POST, url, jsonRequest,
                 { response ->
@@ -63,7 +60,7 @@ class UsernamePromptFragment : Fragment(R.layout.fragment_username_prompt) {
                             "An error occurred, please retry", LENGTH_SHORT
                         ).show()
                     } else {
-                        (activity as SessionActivity).username = usernameInput.toString()
+                        SessionActivity.username = usernameInput.toString()
                         (activity as SessionActivity).setBrainstorming()
                     }
                 },

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import org.arlevin.leancoffree.session.Constants
 import org.arlevin.leancoffree.session.SessionActivity
 import org.json.JSONObject
 
@@ -43,7 +44,7 @@ class JoinSessionActivity : AppCompatActivity() {
 
         if (match != null && match.value.isNotBlank()) {
             val queue = Volley.newRequestQueue(this)
-            val url = "https://leancoffree.com:8085/verify-session/" + match.value
+            val url = Constants.backendBaseUrl + "/verify-session/" + match.value
 
             val stringRequest = StringRequest(Request.Method.POST, url,
                 { response ->
