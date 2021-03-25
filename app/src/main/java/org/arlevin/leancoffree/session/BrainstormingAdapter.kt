@@ -51,6 +51,14 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
             }
         }
 
+        if (isModerator()) {
+            val delete = "Delete"
+            holder.deleteBtn.text = delete
+            holder.deleteBtn.visibility = VISIBLE
+        } else {
+            holder.deleteBtn.visibility = INVISIBLE
+        }
+
         holder.topicTv.text = currentItem.getString("text").trim()
         holder.votesTv.text = votesText
     }
@@ -61,11 +69,22 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
         val topicTv: TextView = itemView.findViewById(R.id.brainstormingTopicTv)
         val votesTv: TextView = itemView.findViewById(R.id.brainstormingVotesTv)
         val voteBtn: Button = itemView.findViewById(R.id.brainstormingVoteBtn)
+        val deleteBtn: Button = itemView.findViewById(R.id.brainstormingDeleteBtn)
     }
 
     fun updateBrainstormingList(activity: Activity, newList: ArrayList<JSONObject>) {
         brainstormingList.clear()
         brainstormingList.addAll(newList)
         activity.runOnUiThread{ this.notifyDataSetChanged() }
+    }
+
+    private fun isModerator(): Boolean {
+        val moderators = SessionActivity.users.getJSONArray("moderator")
+        for (i in 0 until moderators.length()) {
+            if (moderators[i] == SessionActivity.username) {
+                return true
+            }
+        }
+        return false
     }
 }
