@@ -36,15 +36,15 @@
                 android:background="@color/white" />
 
             <TextView
-                    android:id="@+id/brainstormingVotesTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/hr"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:layout_marginStart="15dp"/>
+                android:id="@+id/brainstormingVotesTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hr" />
 
             <Button
                 android:id="@+id/brainstormingDeleteBtn"
