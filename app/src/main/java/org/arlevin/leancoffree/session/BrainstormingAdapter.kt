@@ -45,11 +45,27 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
                 val btnText = "Un-Vote"
                 holder.voteBtn.text = btnText
                 holder.voteBtn.visibility = VISIBLE
+                holder.voteBtn.setOnClickListener {
+                    postVoteForTopic(
+                        "UNCAST",
+                        currentItem.getString("text"),
+                        currentItem.getString("authorDisplayName"),
+                        holder.itemView.context
+                    )
+                }
             }
             SessionActivity.votesLeft > 0 -> {
                 val btnText = "Vote"
                 holder.voteBtn.text = btnText
                 holder.voteBtn.visibility = VISIBLE
+                holder.voteBtn.setOnClickListener {
+                    postVoteForTopic(
+                        "CAST",
+                        currentItem.getString("text"),
+                        currentItem.getString("authorDisplayName"),
+                        holder.itemView.context
+                    )
+                }
             }
             else -> {
                 holder.voteBtn.visibility = INVISIBLE
@@ -98,6 +114,21 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
             }
         }
         return false
+    }
+
+    private fun postVoteForTopic(command: String, text: String, authorDisplayName: String, context: Context) {
+        val jsonRequest = JSONObject()
+        jsonRequest.put("sessionId", SessionActivity.sessionId)
+        jsonRequest.put("text", text)
+        jsonRequest.put("authorDisplayName", authorDisplayName)
+        jsonRequest.put("voterDisplayName", SessionActivity.username)
+        jsonRequest.put("command", command)
+
+        val url = Constants.backendBaseUrl + "/post-vote"
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, jsonRequest, {}, {})
+
+        val queue = Volley.newRequestQueue(context)
+        queue.add(jsonObjectRequest)
     }
 
     private fun deleteTopic(text: String, name: String, context: Context) {
