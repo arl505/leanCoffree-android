@@ -1,6 +1,7 @@
 package org.arlevin.leancoffree.session
 
 import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -9,8 +10,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.arlevin.leancoffree.Constants
 import org.arlevin.leancoffree.R
 import org.json.JSONObject
 
@@ -55,6 +60,13 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
             val delete = "Delete"
             holder.deleteBtn.text = delete
             holder.deleteBtn.visibility = VISIBLE
+            holder.deleteBtn.setOnClickListener {
+                deleteTopic(
+                    currentItem.getString("text"),
+                    currentItem.getString("authorDisplayName"),
+                    holder.itemView.context
+                )
+            }
         } else {
             holder.deleteBtn.visibility = INVISIBLE
         }
@@ -86,5 +98,18 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
             }
         }
         return false
+    }
+
+    private fun deleteTopic(text: String, name: String, context: Context) {
+        val jsonRequest = JSONObject()
+        jsonRequest.put("sessionId", SessionActivity.sessionId)
+        jsonRequest.put("topicText", text)
+        jsonRequest.put("authorName", name)
+
+        val url = Constants.backendBaseUrl + "/delete-topic"
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, jsonRequest, {}, {})
+
+        val queue = Volley.newRequestQueue(context)
+        queue.add(jsonObjectRequest)
     }
 }
