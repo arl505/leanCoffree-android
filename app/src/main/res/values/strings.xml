@@ -11,4 +11,5 @@
     <string name="usernamePromptHeader">Enter a display name</string>
     <string name="usernamePromptVisibility">This will be visible to all in session</string>
     <string name="displayNameLiteral">Display Name</string>
+    <string name="composeTopicHint">Submit a discussion topic!</string>
 </resources>
