@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.apache.commons.lang3.StringUtils
 import org.arlevin.leancoffree.Constants
 import org.arlevin.leancoffree.R
 import org.json.JSONObject
@@ -72,7 +73,7 @@ class BrainstormingAdapter() : RecyclerView.Adapter<BrainstormingAdapter.Brainst
             }
         }
 
-        if (isModerator()) {
+        if (isModerator() || StringUtils.equalsAnyIgnoreCase(currentItem.getString("authorDisplayName"), SessionActivity.username)) {
             val delete = "Delete"
             holder.deleteBtn.text = delete
             holder.deleteBtn.visibility = VISIBLE
