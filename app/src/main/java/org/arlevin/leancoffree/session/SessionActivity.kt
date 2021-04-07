@@ -12,6 +12,8 @@ import ua.naiksoftware.stomp.StompClient
 
 class SessionActivity : AppCompatActivity() {
 
+    private val brainstormingFragment = BrainstormingFragment()
+
     companion object {
         var websocketUserId = ""
         var sessionId = ""
@@ -59,7 +61,7 @@ class SessionActivity : AppCompatActivity() {
 
     fun setBrainstorming() {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.sessionFrame, BrainstormingFragment())
+            replace(R.id.sessionFrame, brainstormingFragment)
             commit()
         }
     }
@@ -75,5 +77,6 @@ class SessionActivity : AppCompatActivity() {
             }
         }
         votesLeft = 3 - votesCast
+        brainstormingFragment.updateVotesLeft(votesLeft)
     }
 }
