@@ -75,17 +75,12 @@
             android:textColorHint="@color/white"
             android:textSize="20sp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/brainstormingRv"
+        <LinearLayout
+            android:id="@+id/brainstormingList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:background="#212930"
-            android:clipToPadding="false"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/votesLeftTv"
-            tools:listitem="@layout/brainstorming_item" />
-
+            app:layout_constraintTop_toBottomOf="@id/votesLeftTv"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

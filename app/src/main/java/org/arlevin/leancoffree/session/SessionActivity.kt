@@ -46,7 +46,11 @@ class SessionActivity : AppCompatActivity() {
         stompClient.topic("/topic/discussion-topics/session/$sessionId").subscribe(
         { message ->
             topics = JSONObject(message.payload)
-            BrainstormingFragment.notifyTopics(this, topics.getJSONArray("discussionBacklogTopics"))
+            Thread {
+                runOnUiThread {
+                    brainstormingFragment.updateTopics()
+                }
+            }.start()
             tabulateVotesLeft(topics.getJSONArray("discussionBacklogTopics"))
         },
         {
